@@ -10,13 +10,9 @@ from aiogram import Bot, Dispatcher
 from aiogram import Router
 from PIL import Image, ImageDraw, ImageFont
 
-
-
 from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv("BOT_TOKEN")
-
-# TOKEN = "7619522580:AAH1Mxb5OzLcGP1O9-OaHYMfVGy_FXVzjL8"
 
 
 bot = Bot(token=TOKEN)
@@ -101,7 +97,7 @@ async def handle_text_input(update: Update, context: CallbackContext):
                     data["messages"].append(msg.message_id)
                     
                 else: 
-                    msg = await update.message.reply_text(f"{len(data["prices"])}. Добавлена цена: {price}.")
+                    msg = await update.message.reply_text(f"{len(data['prices'])}. Добавлена цена: {price}.")
                     data["messages"].append(update.message.message_id)
                     data["messages"].append(msg.message_id)
                     # await ebanytu(update, context)  # Вызов функции
@@ -141,8 +137,6 @@ async def handle_text_input(update: Update, context: CallbackContext):
                  f"Все будет зависеть от повреждений процессора. Новая ЭБУ на данный холодильник будет стоить {int((max(data["prices"]))*1.5)}. \n"
                  f"ЭБУ — это мозги системы охлаждения. Выбирайте надежные и оригинальные модели, чтобы избежать проблем в будущем!" )
             
-            
-        
         elif part == "ПЗР":
             await update.message.reply_text(
                  f"Добрый день. Для холодильника фирмы {brand}, примерная стоимость Пускозащитного реле составит от {min(data["prices"])} до {max(data["prices"])} рублей.\n"
