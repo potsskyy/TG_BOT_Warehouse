@@ -92,7 +92,7 @@ async def handle_text_input(update: Update, context: CallbackContext):
                 data["prices"].append(price)
                 
                 if len(data["prices"]) <3:
-                    msg = await update.message.reply_text(f"{len(data["prices"])}. Добавлена цена: {price}. Введите еще")
+                    msg = await update.message.reply_text(f"{len(data['prices'])}. Добавлена цена: {price}. Введите еще")
                     data["messages"].append(update.message.message_id)
                     data["messages"].append(msg.message_id)
                     
@@ -126,7 +126,7 @@ async def handle_text_input(update: Update, context: CallbackContext):
         
         if part == "Компрессоры":
             await update.message.reply_text(
-                 f"Добрый день. Для холодильника фирмы {brand}, примерная стоимость нового Компрессора составит от {min(data["prices"])} до {max(data["prices"])} рублей.\n"
+                 f"Добрый день. Для холодильника фирмы {brand}, примерная стоимость нового Компрессора составит от {min(data['prices'])} до {max(data['prices'])} рублей.\n"
                  f"Все будет зависеть от страны производства, энергопотребления и металла из которого сделаны обмотки компрессора. \n"
                  f"Компрессор — это сердце системы охлаждения. Выбирайте надежные модели, чтобы избежать проблем в будущем!" )
             await handle_numbers(update, context)  # Вызов функции
@@ -233,7 +233,7 @@ async def handle_numbers(update: Update, context: CallbackContext):
 
     prices = sorted(user_data[chat_id]["prices"]) #сортируем прайс чтоб фотки красиво шли во возрастанию
     part = user_data[chat_id]["part"]
-    output_paths = ["output1.jpg", "output2.jpg", "output3.jpg"]
+    output_paths = ["images/output/output1.jpg", "images/output/output2.jpg", "images/output/output3.jpg"]
 
     
 
