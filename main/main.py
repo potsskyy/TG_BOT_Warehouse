@@ -1,5 +1,5 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, filters, CallbackContext
+from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, filters, CallbackContext, ApplicationBuilder, ContextTypes
 from telegram import ReplyKeyboardMarkup, KeyboardButton
 
 import random
@@ -10,10 +10,18 @@ from aiogram import Bot, Dispatcher
 from aiogram import Router
 from PIL import Image, ImageDraw, ImageFont
 
+from telegram import  Bot
+from aiohttp import web
+
+
+
+
+
+
 from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv("BOT_TOKEN")
-
+application = Application.builder().token(TOKEN).build()
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
@@ -36,6 +44,17 @@ async def start(update: Update, context: CallbackContext):
 
     await update.message.reply_text("Выберите запчасть:", reply_markup=reply_markup)
     # await update.message.reply_text("Нажмите кнопку, чтобы начать заново", reply_markup=reply_keyboard)
+
+
+async def handle(request):
+    data = await request.json()
+    await Application.update_queue.put(Update.de_json(data, bot))
+    return web.Response()
+
+async def set_webhook():
+    url = os.environ.get("RENDER_EXTERNAL_URL")  # автоматическая переменная у Render
+    if url:
+        await bot.set_webhook(f"{url}/webhook")
 
 
 
@@ -277,7 +296,7 @@ async def handle_numbers(update: Update, context: CallbackContext):
             draw = ImageDraw.Draw(image)
 
              # Загружаем жирный шрифт
-            font = ImageFont.truetype("fonts/ARLRDBD.TTF", 40)
+            font = ImageFont.truetype("fonts/arialbd.ttf", 40)
 
             text = f"{new_price} {word}"
 
@@ -504,16 +523,33 @@ async def handle_numbers(update: Update, context: CallbackContext):
 
     
 
-def main():
-    app = Application.builder().token(TOKEN).build()
+# def main():
+#     app = Application.builder().token(TOKEN).build()
 
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CallbackQueryHandler(handle_part_selection))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text_input))
+#     app.add_handler(CommandHandler("start", start))
+#     app.add_handler(CallbackQueryHandler(handle_part_selection))
+#     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text_input))
 
-    print("Бот запущен...")
-    app.run_polling()
+#     print("Бот запущен...")
+#     app.run_polling()
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
+
+async def main():
+    await set_webhook()
+    app = web.Application()
+    app.router.add_post("/webhook", handle)
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, port=int(os.environ.get("PORT", 10000)))
+    await site.start()
+
+    print("Server started")
+    await application.initialize()
+    await application.start()
+    # await application.updater.start_polling()  # можно удалить, если только webhook
+
+import asyncio
+asyncio.run(main())
