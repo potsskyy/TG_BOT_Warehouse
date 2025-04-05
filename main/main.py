@@ -299,7 +299,7 @@ async def handle_numbers(update: Update, context: CallbackContext):
             draw = ImageDraw.Draw(image)
 
              # Загружаем жирный шрифт
-            font = ImageFont.truetype("fonts/fonts/arialbd.ttf", 25)
+            font = ImageFont.truetype("fonts/arialbd.ttf", 25)
 
             text = f"{new_price} {word}"
 
@@ -324,7 +324,7 @@ async def handle_numbers(update: Update, context: CallbackContext):
             draw = ImageDraw.Draw(image)
 
              # Загружаем жирный шрифт
-            font = ImageFont.truetype("fonts/fonts/arialbd.ttf", 30)
+            font = ImageFont.truetype("fonts/arialbd.ttf", 30)
 
             text = f"{new_price} {word}"
 
@@ -349,7 +349,7 @@ async def handle_numbers(update: Update, context: CallbackContext):
             draw = ImageDraw.Draw(image)
 
              # Загружаем жирный шрифт
-            font = ImageFont.truetype("fonts/fonts/arialbd.ttf", 30)
+            font = ImageFont.truetype("fonts/arialbd.ttf", 30)
 
             text = f"{new_price} {word}"
 
@@ -374,7 +374,7 @@ async def handle_numbers(update: Update, context: CallbackContext):
             draw = ImageDraw.Draw(image)
 
              # Загружаем жирный шрифт
-            font = ImageFont.truetype("fonts/fonts/arialbd.ttf", 36)
+            font = ImageFont.truetype("fonts/arialbd.ttf", 36)
 
             text = f"{new_price} {word}"
 
@@ -399,7 +399,7 @@ async def handle_numbers(update: Update, context: CallbackContext):
             draw = ImageDraw.Draw(image)
 
              # Загружаем жирный шрифт
-            font = ImageFont.truetype("fonts/fonts/arialbd.ttf", 15)
+            font = ImageFont.truetype("fonts/arialbd.ttf", 15)
 
             text = f"{new_price} {word}"
 
@@ -425,7 +425,7 @@ async def handle_numbers(update: Update, context: CallbackContext):
             draw = ImageDraw.Draw(image)
 
              # Загружаем жирный шрифт
-            font = ImageFont.truetype("fonts/fonts/arialbd.ttf", 24)
+            font = ImageFont.truetype("fonts/arialbd.ttf", 24)
 
             text = f"{new_price} {word}"
 
@@ -450,7 +450,7 @@ async def handle_numbers(update: Update, context: CallbackContext):
             draw = ImageDraw.Draw(image)
 
              # Загружаем жирный шрифт
-            font = ImageFont.truetype("fonts/fonts/arialbd.ttf", 24)
+            font = ImageFont.truetype("fonts/arialbd.ttf", 24)
 
             text = f"{new_price} {word}"
 
@@ -475,7 +475,7 @@ async def handle_numbers(update: Update, context: CallbackContext):
             draw = ImageDraw.Draw(image)
 
              # Загружаем жирный шрифт
-            font = ImageFont.truetype("fonts/fonts/arialbd.ttf", 20)
+            font = ImageFont.truetype("fonts/arialbd.ttf", 20)
 
             text = f"{new_price} {word}"
 
