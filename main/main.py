@@ -273,7 +273,7 @@ async def handle_numbers(update: Update, context: CallbackContext):
             draw = ImageDraw.Draw(image)
 
              # Загружаем жирный шрифт
-            font = ImageFont.truetype("fonts/fonts/arialbd.ttf", 40)
+            font = ImageFont.truetype("fonts/ARLRDBD.TTF", 40)
 
             text = f"{new_price} {word}"
 
