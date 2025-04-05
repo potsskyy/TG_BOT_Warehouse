@@ -63,13 +63,17 @@ async def handle_text_input(update: Update, context: CallbackContext):
     chat_id = update.message.chat_id
     
     if chat_id not in user_data:
+        # Инициализируем данные, если пользователь ещё не начал
+        user_data[chat_id] = {"messages": [], "prices": []}
+        data = user_data[chat_id]
+
         msg = await update.message.reply_text("Сначала выберите запчасть, нажав /start.")
         data["messages"].append(update.message.message_id)
         data["messages"].append(msg.message_id)
         return
-
-    text = update.message.text
     data = user_data[chat_id]
+    text = update.message.text
+    
 
     if data["awaiting_brand"]:
         data["brand"] = text
