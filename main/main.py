@@ -491,19 +491,6 @@ async def handle_numbers(update: Update, context: CallbackContext):
             with open(output_paths[i], 'rb') as photo_file:
                 await context.bot.send_photo(chat_id=chat_id, photo=photo_file)
         
-
-  
-    
-
-    
-
-    
-   
-
-
-
-    
-
 def main():
     app = Application.builder().token(TOKEN).build()
 
